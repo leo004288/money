@@ -23,18 +23,13 @@ import java.util.List;
 public class AdminController {
 
     private final memberService memberService;
-/*
-    public AdminController(memberService memberService) {
-        this.memberService = memberService;
-    }
-*/
 
     // 회원목록
     @GetMapping("/admin/members")
     public String memberList(Model model) {
         List<Member> memberList = memberService.findAll();
         model.addAttribute("memberList", memberList);
-        return "memberList";  // memberList.html
+        return "memberList";
     }
 
     // 회원추가

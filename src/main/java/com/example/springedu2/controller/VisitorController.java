@@ -22,18 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class VisitorController {
 
-    // 1.  @Autowired 이용 생성자 주입
-    // @Autowired
-    // private VisitorRepository visitorRepository;
-
-    // 2. 생성자 주입(최근 방식)
-    // private VisitorRepository visitorRepository;
-    // public VisitorController(VisitorRepository visitorRepository) {
-    //     this.visitorRepository = visitorRepository;
-    // }
-
-    // 3. 생성자 주입 다른방법
-    // @RequiredArgsConstructor 필수 : lombok 필수
     private final VisitorRepository visitorRepository;
 
     // 방명록 조회
@@ -45,7 +33,6 @@ public class VisitorController {
 
     private ModelAndView visitorView(List<Visitor> visitors, String buttonText) {
         ModelAndView mv = new ModelAndView("visitorView");
-        // mv.setViewName("visitorView");  // visitorView.html(Model 사용) - thymeleaf
         if(visitors.isEmpty()){
             mv.addObject("msg", "조회된 결과가 없습니다");
         } else {
@@ -58,16 +45,11 @@ public class VisitorController {
     }
 
     // 방명록 검색
-    // 검색 : 모두 대문자로 검색어를 포함한 data
-    // 단, 정렬 id를 내림차순으로 출력
-    // findByMemoContainingIgnoreCaseOrderByIdDesc(key)
     @GetMapping("/vsearch")
     public ModelAndView vsearch(@RequestParam(defaultValue = "") String key) {
         List<Visitor> visitors = key.isBlank()
                 ?   visitorRepository.findAll()
                 :   visitorRepository.findByIrum(key);
-             // :   visitorRepository.findByMemoContainingIgnoreCaseOrderByIdDesc(key);
-             // :   visitorRepository.findByName(key);
 
         System.out.println(visitors);
 
@@ -75,8 +57,6 @@ public class VisitorController {
     }
 
     // 방명록 추가
-    // @Valid : form 에서 넘어온 자료를 @Entity에 있는
-    // 설정(@ID, @NotBlank, @Column(nullable=false))과 비교해 입력
     @PostMapping("/vinsert")
     @Transactional
     public String vinsert(
@@ -96,9 +76,6 @@ public class VisitorController {
     }
 
     // 방명록 id로 조회 : rest방식 호출 결과 : json
-    // return 값이 Visitor 객체인데 json으로 변경되어 다운로드된다
-    // return  값이 ResponseEntity<Visitor> 일때는 data는 json으로 상태코드로 리턴가능
-    // http://localhost:9090/one?id=1
     @GetMapping(value = "/one", produces = "application/json; charset=utf-8")
     @ResponseBody
     public ResponseEntity<Visitor> one(@RequestParam Integer id) {

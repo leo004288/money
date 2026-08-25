@@ -20,11 +20,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MemberController {
 
     private final memberService memberService;
-    /*
-    public MemberController(MemberService memberService) {
-        this.memberService = memberService
-    }
-    */
 
     // 회원가입페이지 이동
     @GetMapping("/members/register")
