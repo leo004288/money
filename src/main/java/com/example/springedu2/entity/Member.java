@@ -22,7 +22,7 @@ public class Member { // 회원
     private Long id;
 
     @Column(nullable = false, updatable = true, length = 30)  // notnull, unique, varchar(30)
-    private String username;
+    private String userId;
 
     @Column(nullable = false) // 암호화된 비번은 길어짐 length 지정안함
     private String password;  // 로그인 비번
