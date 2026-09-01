@@ -47,4 +47,8 @@ public class Member { // 회원
     @CreationTimestamp
     @Column(nullable = false)         // 자동
     private LocalDateTime updatedAt;  // 계정 수정일
+
+    @CreationTimestamp
+    @Column(nullable = false)
+    private LocalDateTime DeleteAt;
 }
