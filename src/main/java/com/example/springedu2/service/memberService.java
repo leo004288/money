@@ -36,7 +36,7 @@ public class memberService implements UserDetailsService {
                 ));
         // 조회한 결과를 Member -> UserDetails 로 변환
         UserDetails user = User.builder()
-                .username(member.getUsername())     // 아이디
+                .username(member.getUserId())     // 아이디
                 .password(member.getPassword())     // 비번
                 .disabled(!member.isEnabled())      // 계정 사용가능
                 .roles(member.getRole().toString()) // 사용자 권한 "ADMIN" -> Role_ADMIN 권한
@@ -81,7 +81,7 @@ public class memberService implements UserDetailsService {
 
         Member member = new Member();
 
-        member.setUsername( memberForm.getUsername() );
+        member.setUserId( memberForm.getUsername() );
         member.setPassword( passwordEncoder.encode( memberForm.getPassword() ) );
         member.setName( memberForm.getName() );
         member.setEmail( memberForm.getEmail() );
@@ -146,7 +146,7 @@ public class memberService implements UserDetailsService {
     @Transactional
     public void delete(Long id, String name) {
         Member member = findById(id);
-        if (member.getUsername().equals(name)) {
+        if (member.getUserId().equals(name)) {
             throw new IllegalArgumentException("현재 로그인한 자신은 삭제할 수 없습니다");
         }
         memberRepository.delete(member);

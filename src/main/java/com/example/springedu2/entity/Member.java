@@ -50,5 +50,5 @@ public class Member { // 회원
 
     @CreationTimestamp
     @Column(nullable = false)
-    private LocalDateTime DeleteAt;
+    private LocalDateTime DeleteAt;   // 계정 삭제일
 }
