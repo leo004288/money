@@ -25,8 +25,6 @@ public class DataInitialize implements ApplicationRunner {
         // 기존 계정이 없다면 admin, user 계정을 생성 -> mysql에 저장
         createIfNotExists("admin", "admin1234", "관리자", "admin@example.com", Role.ADMIN);
         createIfNotExists("user",  "user1234",  "일반",   "user@example.com",  Role.USER);
-        createIfNotExists("guest", "guest",     "손님",   "guest@example.com", Role.GUEST);
-
     }
 
     private void createIfNotExists(String username, String password,
@@ -38,7 +36,7 @@ public class DataInitialize implements ApplicationRunner {
 
         // 계정이 없다면 저장
         Member member = new Member();
-        member.setUsername(username);
+        member.setUserId(username);
         member.setPassword(passwordEncoder.encode(password));
         member.setName(name);
         member.setEmail(email);
